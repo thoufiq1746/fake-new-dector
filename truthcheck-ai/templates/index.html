@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TruthCheck AI - Know What's True Before You Share</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">
+            <span class="logo-icon">🛡️</span> TruthCheck <span class="badge">AI</span>
+        </div>
+    </nav>
+
+    <main class="container">
+        <!-- HEADER SECTION -->
+        <header class="header">
+            <h1>Check news before you believe or share it.</h1>
+            <p class="subtitle">Know what's true before you share. Powered by Gemini AI.</p>
+        </header>
+
+        <!-- INPUT SECTION -->
+        <section class="card input-card">
+            <div class="demo-buttons">
+                <span class="demo-label">Demo Examples:</span>
+                <button type="button" class="btn-demo btn-reliable" onclick="loadDemo('reliable')">Try Reliable News</button>
+                <button type="button" class="btn-demo btn-misleading" onclick="loadDemo('misleading')">Try Misleading News</button>
+                <button type="button" class="btn-demo btn-fake" onclick="loadDemo('fake')">Try Fake News</button>
+            </div>
+
+            <form id="analyzeForm">
+                <textarea id="newsInput" rows="6" placeholder="Paste your news article, headline, or claim here..." required></textarea>
+                <div class="form-actions">
+                    <button type="submit" id="submitBtn" class="btn-primary">Check News</button>
+                </div>
+            </form>
+
+            <p class="disclaimer">⚠️ AI results are estimates and should be verified using reliable sources.</p>
+        </section>
+
+        <!-- ERROR ALERT -->
+        <div id="errorAlert" class="alert alert-danger hidden"></div>
+
+        <!-- LOADING SECTION -->
+        <section id="loadingSection" class="card loading-card hidden">
+            <div class="spinner"></div>
+            <h3>Analyzing Content...</h3>
+            <ul class="loading-steps">
+                <li id="step1" class="active">Extracting claims</li>
+                <li id="step2">Checking information</li>
+                <li id="step3">Evaluating credibility</li>
+                <li id="step4">Generating result</li>
+            </ul>
+        </section>
+
+        <!-- RESULT SECTION -->
+        <section id="resultSection" class="card result-card hidden">
+            <div class="result-header">
+                <div id="classificationBadge" class="badge-status">
+                    <!-- Status dynamic -->
+                </div>
+                <div class="score-container">
+                    <div class="score-box">
+                        <span id="scoreValue" class="score-num">0</span>
+                        <span class="score-max">/ 100</span>
+                    </div>
+                    <div class="confidence-tag">Confidence: <span id="confidenceValue">High</span></div>
+                </div>
+            </div>
+
+            <div class="section-block">
+                <h3>Why?</h3>
+                <p id="summaryText" class="summary-text"></p>
+            </div>
+
+            <div class="section-block">
+                <h3>Claims Found</h3>
+                <div id="claimsList" class="claims-list"></div>
+            </div>
+
+            <div class="section-block">
+                <h3>Reasons</h3>
+                <ul id="reasonsList" class="reasons-list"></ul>
+            </div>
+
+            <div class="section-block">
+                <h3>Evidence & Context</h3>
+                <div id="evidenceList" class="evidence-list"></div>
+            </div>
+
+            <button type="button" class="btn-secondary" onclick="resetForm()">Check Another News</button>
+        </section>
+    </main>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
